@@ -20,6 +20,12 @@ app.post("/sign-up", (req, res) => {
         return res.status(400).send({ err: err });
       });
   });
+
+    // LOGOUT
+    app.get('/logout', (req, res) => {
+        res.clearCookie('nToken');
+        res.redirect('/');
+      });
     };
     
 
