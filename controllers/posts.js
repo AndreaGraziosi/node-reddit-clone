@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 
 module.exports = (app) => {
 
@@ -22,17 +23,46 @@ module.exports = (app) => {
             console.log(err.message);
           })
       })
-
+            //show
       app.get("/posts/:id", function(req, res) {
         // LOOK UP THE POST
-        Post.findById(req.params.id).lean()
-          .then(post => {
-            res.render("posts-show", { post });
-          })
-          .catch(err => {
-            console.log(err.message);
-          });
+        // Post.findById(req.params.id).lean()
+        //   .then(post => {
+        //     res.render("posts-show", { post });
+        //   })
+        //   .catch(err => {
+        //     console.log(err.message);
+        //   });
+        // LOOK UP THE POST
+Post.findById(req.params.id).lean().populate('comments').then((post) => {
+    res.render('post-show', { post })
+  }).catch((err) => {
+    console.log(err.message)
+  })
       });
+
+      // CREATE Comment
+app.post("/posts/:postId/comments", function(req, res) {
+    // INSTANTIATE INSTANCE OF MODEL
+    const comment = new Comment(req.body);
+  
+    // SAVE INSTANCE OF Comment MODEL TO DB
+    comment
+      .save()
+      .then(comment => {
+        return Post.findById(req.params.postId);
+      })
+      .then(post => {
+        post.comments.unshift(comment);
+        return post.save();
+      })
+      .then(post => {
+        res.redirect(`/`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
       
           // SUBREDDIT
 app.get("/n/:subreddit", function(req, res) {

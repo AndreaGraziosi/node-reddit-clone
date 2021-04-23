@@ -1,19 +1,14 @@
 const express = require('express')
 const handlebars = require('handlebars')
 const bodyParser = require('body-parser');
-
 const port = 3000
 const expressValidator = require('express-validator');
 // Set db
 require('./data/reddit-db');
-
 //server
 const app = express()
-
 // Middleware
 const exphbs  = require('express-handlebars');
-
-
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
@@ -24,18 +19,11 @@ app.use(expressValidator());
 
 //controllers
 require('./controllers/posts.js')(app);
+require('./controllers/comments.js')(app);
+
 
 //testing
 module.exports = app;
-
-
-
-
-//Routes:
-// app.get('/', (req, res) => {
-//     //   res.send('Hello Booches!')
-//     res.render('posts-index', {})
-//     })
 
 app.get('/posts/new', (req, res) => {
 //   res.send('Hello Booches!')

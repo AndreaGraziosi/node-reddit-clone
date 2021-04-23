@@ -9,3 +9,4 @@ const PostSchema = new Schema({
 });
 
 module.exports = mongoose.model("Post", PostSchema);
+comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
