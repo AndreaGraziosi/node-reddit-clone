@@ -25,7 +25,8 @@ app.use(expressValidator());
 //controllers
 require('./controllers/posts.js')(app);
 
-
+//testing
+module.exports = app;
 
 
 
