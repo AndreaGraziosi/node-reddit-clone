@@ -29,11 +29,13 @@ require('./controllers/auth.js')(app);
 
 //testing
 module.exports = app;
-
-app.get('/posts/new', (req, res) => {
-//   res.send('Hello Booches!')
-res.render('posts-new', {})
+app.get("/", (req, res) => {
+  res.render('head')
 })
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

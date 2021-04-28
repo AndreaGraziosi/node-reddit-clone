@@ -23,6 +23,11 @@ module.exports = (app) => {
             console.log(err.message);
           })
       })
+      app.get('/posts/new', (req, res) => {
+        //   res.send('Hello new posts!')
+        res.render('posts-new', {})
+        })
+
             //show
       app.get("/posts/:id", function(req, res) {
         // LOOK UP THE POST
@@ -35,7 +40,7 @@ module.exports = (app) => {
         //   });
         // LOOK UP THE POST
 Post.findById(req.params.id).lean().populate('comments').then((post) => {
-    res.render('post-show', { post })
+    res.render('posts-show', { post })
   }).catch((err) => {
     console.log(err.message)
   })
