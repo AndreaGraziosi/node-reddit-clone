@@ -13,11 +13,14 @@
       <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
-          <ul class="nav navbar-nav navbar-right">
-      <li><a href="/logout">Logout</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/sign-up">Sign Up</a></li>
-    </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {{#if currentUser}}
+          <li><a href="/logout">Logout</a></li>
+        {{else}}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/sign-up">Sign Up</a></li>
+        {{/if}}
+      </ul>  
 
       <h5 class="text-white h4">Collapsed content</h5>
       <span class="text-muted">Reddit-clone</span>
@@ -26,7 +29,9 @@
   <nav class="navbar navbar-light" style="background-color: #ddd6f3;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">  </button>
       <span class="navbar-toggler-icon"></span>
-      <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+        {{#if currentUser}}
+          <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+        {{/if}}
   
   </nav>
 </div>  

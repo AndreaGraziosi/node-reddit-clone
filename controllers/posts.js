@@ -4,26 +4,33 @@ const Comment = require('../models/comment');
 
 module.exports = (app) => {
 
-    // CREATE
-    app.post('/posts/new', (req, res) => {
-      // INSTANTIATE INSTANCE OF POST MODEL
-      const post = new Post(req.body);
-  
-      // SAVE INSTANCE OF POST MODEL TO DB
-      post.save((err, post) => {
-        // REDIRECT TO THE ROOT
-        return res.redirect('/');
-      })
+   // CREATE
+app.post("/posts/new", (req, res) => {
+  if (req.user) {
+    var post = new Post(req.body);
+
+    post.save(function(err, post) {
+      return res.redirect(`/`);
     });
-    app.get('/', (req, res) => {
-        Post.find({}).lean()
-          .then(posts => {
-            res.render('posts-index', { posts });
-          })
-          .catch(err => {
-            console.log(err.message);
-          })
-      })
+  } else {
+    return res.status(401); // UNAUTHORIZED
+  }
+});
+
+    
+    //INDEX
+    app.get("/", (req, res) => {
+      var currentUser = req.user;
+    
+      Post.find({})
+        .then(posts => {
+          res.render("posts-index", { posts, currentUser });
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    });
+
       app.get('/posts/new', (req, res) => {
         //   res.send('Hello new posts!')
         res.render('posts-new', {})
@@ -39,6 +46,7 @@ module.exports = (app) => {
         //   .catch(err => {
         //     console.log(err.message);
         //   });
+        
         // LOOK UP THE POST
 Post.findById(req.params.id).lean().populate('comments').then((post) => {
     res.render('posts-show', { post })
