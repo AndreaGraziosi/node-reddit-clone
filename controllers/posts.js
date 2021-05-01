@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+//sconst { rejects } = require('node:assert');
 
 module.exports = (app) => {
 
@@ -55,9 +56,18 @@ app.post("/posts/:postId/comments", function(req, res) {
     comment
       .save()
       .then(comment => {
-        return Post.findById(req.params.postId);
+        let post = Post.findById(req.params.postId);
+
+        console.log("this is the given comment => ", comment)
+        console.log("this is the found post => ", post)
+        return post
+        //if(!post) reject('no post found')
       })
       .then(post => {
+
+        console.log("***** STEP 2 ******* POST HERE => ", post)
+        console.log("***** STEP 2 ******* COMMENT HERE => ", post.comments)
+
         post.comments.unshift(comment);
         return post.save();
       })
