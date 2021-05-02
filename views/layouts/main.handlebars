@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+   
+   
+    {{!-- <link rel="style.css"> ? is this correct? --}}
+   
+   
     <title>Reddit.js</title>
   </head>
   <body>
@@ -22,12 +26,14 @@
         {{/if}}
       </ul>  
 
-      <h5 class="text-white h4">Collapsed content</h5>
+      
       <span class="text-muted">Reddit-clone</span>
     </div>
   </div>
   <nav class="navbar navbar-light" style="background-color: #ddd6f3;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> click here
+
+    </button>
       <span class="navbar-toggler-icon"></span>
         {{#if currentUser}}
           <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>

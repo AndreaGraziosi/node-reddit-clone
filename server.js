@@ -15,15 +15,18 @@ require('dotenv').config();
 // Set db
 require('./data/reddit-db');
 //server
+//=====================
+//=====================
 var app = express()
-
+//=====================
+//=====================
 
 // Middle ware
-app.use(cookieParser()); // Add this after you initialize express.
+
 const exphbs  = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
+app.use(cookieParser()); // Add this after you initialize express.
 
 // custom middleware--check auth
 var checkAuth = (req, res, next) => {

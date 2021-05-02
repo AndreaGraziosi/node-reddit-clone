@@ -1,17 +1,13 @@
-<div class="row">
-<form class="row g-3" action="/sign-up">
-  <div class="col-auto">
-    <label for="staticEmail2" class="visually-hidden">Email</label>
-    <input type="username" readonly class="form-control-plaintext" id="staticEmail2" value="email">
-  </div>
-  <div class="col-auto">
-    <label for="inputPassword2" class="visually-hidden">Password</label>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3">Sign Up
 
-    </button>
-  </div>
-</form>
+
+<div class="wrapper">
+   <form class="form-signin" action="/sign-up">
+      <h2 class="form-signin-heading">Please Signup</h2>
+      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+      {{!-- <label class="checkbox">
+      <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label> --}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">sign up</button>   
+   </form>
 </div>
