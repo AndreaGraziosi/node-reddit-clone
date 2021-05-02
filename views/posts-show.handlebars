@@ -14,9 +14,9 @@
   </div>
   <div class="row">
     {{#each post.comments}}
-        {{this.content}}
- <p>{{post.author.username}}</p>
-
+      <p>{{this.content}}</p>
+      <p class="text-right">{{this.author.username}}</p>
     {{/each}}
+
   </div>
 
