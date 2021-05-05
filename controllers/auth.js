@@ -2,26 +2,28 @@
 const jwt = require('jsonwebtoken');
 const User = require("../models/user");
 
-    module.exports = app => {
+module.exports = app => {
      
       
 
       // SIGN UP FORM
   app.get("/sign-up", (req, res) => {
+    console.log('in get func')
     res.render("sign-up");
   });
 
 
      // SIGN UP POST
-app.post("/sign-up", (req, res) => {
+  app.post("/sign-up", (req, res) => {
     // Create User and JWT
+    console.log('test user sign')
     const user = new User(req.body);
-  
+    console.log(user)
     user.save().then((user) => {
         var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
         res.redirect('/');
-  
+
       })
       .catch(err => {
         console.log(err.message);
@@ -29,18 +31,18 @@ app.post("/sign-up", (req, res) => {
       });
   });
 
-    // LOGOUT
-    app.get('/logout', (req, res) => {
-        res.clearCookie('nToken');
-        res.redirect('/');
-      });
+      // LOGOUT
+  app.get('/logout', (req, res) => {
+    res.clearCookie('nToken');
+    res.redirect('/');
+  });
 
-        // LOGIN FORM
+          // LOGIN FORM
   app.get('/login', (req, res) => {
     res.render('login');
   });
 // LOGIN
-app.post("/login", (req, res) => {
+  app.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     // Find this user name
@@ -71,7 +73,7 @@ app.post("/login", (req, res) => {
       });
   });
 
-    };
+};
     
 
 

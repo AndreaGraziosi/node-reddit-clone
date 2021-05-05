@@ -1,6 +1,5 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
-const Post = require('../models/posts');
 const User = require('../models/user');
 //const { rejects } = require('node:assert');
 
@@ -77,6 +76,7 @@ return res.status(401); // UNAUTHORIZED
       // CREATE Comment
 app.post("/posts/:postId/comments", function(req, res) {
     // INSTANTIATE INSTANCE OF MODEL
+    
     const comment = new Comment(req.body);
   
     // SAVE INSTANCE OF Comment MODEL TO DB

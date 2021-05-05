@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const handlebars = require('handlebars')
 // const bodyParser = require('body-parser'); DEPRECATED
@@ -7,9 +8,6 @@ var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 const Comment = require('./models/comment');
-
-
-require('dotenv').config();
 
 
 // Set db
@@ -28,12 +26,20 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(cookieParser()); // Add this after you initialize express.
 
+app.use(express.json()); //Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+// Add after body parser initialization!
+app.use(expressValidator());
+
+
 // custom middleware--check auth
 var checkAuth = (req, res, next) => {
   console.log("Checking authentication");
   if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+    console.log("in if statement")
     req.user = null;
   } else {
+    console.log('in else statement')
     var token = req.cookies.nToken;
     var decodedToken = jwt.decode(token, { complete: true }) || {};
     req.user = decodedToken.payload;
@@ -42,15 +48,8 @@ var checkAuth = (req, res, next) => {
   next();
 };
 
-
-
 // add some auth stuff
 
-
-app.use(express.json()); //Used to parse JSON bodies
-app.use(express.urlencoded()); //Parse URL-encoded bodies
-// Add after body parser initialization!
-app.use(expressValidator());
 app.use(checkAuth);
 
 
@@ -61,15 +60,13 @@ require('./controllers/auth.js')(app);
 
 
 //testing
-module.exports = app;
-app.get("/", (req, res) => {
-  res.render('main')
-})
 
-
-
-
+// app.get("/", (req, res) => {
+//   res.render('main')
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+module.exports = app;
