@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 assert = require("assert");
 
-const url = "mongodb://localhost/reddit-db";
+const url = "mongodb+srv://user:123@cluster0.zmok4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
 mongoose.connect(
   url,
