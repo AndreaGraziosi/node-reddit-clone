@@ -7,7 +7,15 @@ const expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+
+
+//added these to connect to heroku
 const Comment = require('./models/comment');
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
+const port = process.env.PORT || 3000;
+app.listen(port);
+
 
 
 // Set db
