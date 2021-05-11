@@ -1,9 +1,18 @@
-Problem with step 6 authentication
-sign up page does not redirect.
+```
+An application that works like Reddit!
 
- caused to crash
- const Post = require('../models/posts');
-const User = require('../models/user');
+```
 
-what is?
-const { rejects } = require('node:assert');
+## Tech Stack
+
+```
+Node.js
+Express.js
+Handlebars
+Mongodb 
+Mongoose 
+
+Written in Java Script
+
+```
+
