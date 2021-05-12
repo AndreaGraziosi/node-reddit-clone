@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 const Comment = require('./models/comment');
 
 
-const port = process.env.PORT || 3000;
+
 
 
 
@@ -72,7 +72,7 @@ require('./controllers/auth.js')(app);
 // app.get("/", (req, res) => {
 //   res.render('main')
 // })
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
